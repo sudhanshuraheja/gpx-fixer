@@ -28,3 +28,11 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/sudhanshuraheja/go-garmin-gpx"
+
+[[constraint]]
+  name = "github.com/stretchr/testify"
+  version = "1.2.1"
