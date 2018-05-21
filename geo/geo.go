@@ -30,7 +30,7 @@ func DistanceInMetresBetweenPoints(point1, point2 Point) float64 {
 	a := square(math.Sin(latitudeDelta/2)) + (square(math.Sin(longitudeDelta/2)) * math.Cos(currentLatitude) * math.Cos(newLatitude))
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
 	distance := radiusOfEarthInMetres * c
-	return math.Round(distance)
+	return math.Round(distance*10000) / 10000
 }
 
 // DistanceInMetresIncludingElevation calculates distance and uses elevation
@@ -40,5 +40,5 @@ func DistanceInMetresIncludingElevation(point1, point2 Point) float64 {
 	groundDistance := DistanceInMetresBetweenPoints(point1, point2)
 
 	distance := math.Sqrt(square(elevationDelta) + square(groundDistance))
-	return math.Round(distance)
+	return math.Round(distance*10000) / 10000
 }

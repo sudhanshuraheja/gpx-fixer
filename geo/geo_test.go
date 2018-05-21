@@ -20,10 +20,10 @@ func Test_Distance(t *testing.T) {
 	assert.Equal(t, 0.0, DistanceInMetresBetweenPoints(Point{360.0, 360.0, 0.0}, Point{0.0, 0.0, 0.0}))
 
 	// Eden Gardens Diameter
-	assert.Equal(t, 174.0, DistanceInMetresIncludingElevation(Point{22.565129, 88.342979, 0.0}, Point{22.564000, 88.343628, 100.0}))
+	assert.Equal(t, 173.7846, DistanceInMetresIncludingElevation(Point{22.565129, 88.342979, 0.0}, Point{22.564000, 88.343628, 100.0}))
 }
 
 func Test_Distance3D(t *testing.T) {
 	assert.Equal(t, 100.0, DistanceInMetresIncludingElevation(Point{0.0, 0.0, 0.0}, Point{0.0, 0.0, 100.0}))
-	assert.Equal(t, 495.0, DistanceInMetresIncludingElevation(Point{28.663784, 77.086628, 100.0}, Point{28.663153, 77.091650, 100.0}))
+	assert.Equal(t, 494.9857, DistanceInMetresIncludingElevation(Point{28.663784, 77.086628, 100.0}, Point{28.663153, 77.091650, 100.0}))
 }
