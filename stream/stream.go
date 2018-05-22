@@ -3,6 +3,7 @@ package stream
 import (
 	"fmt"
 	"log"
+	"math"
 	"time"
 
 	gpx "github.com/sudhanshuraheja/go-garmin-gpx"
@@ -27,6 +28,7 @@ type Drop struct {
 	Cadence     int
 	Distance    float64
 	Distance3D  float64
+	Pace        float64
 	Aggregates  struct {
 		Climb      float64
 		Time       float64
@@ -43,7 +45,7 @@ type Drop struct {
 
 // Display the drop
 func (d *Drop) Display() {
-	fmt.Printf("[%v][%v] %v,%v ^%v s%v c%v h%v d%v %v (%v) [A] ^%v +%v %v (%v) [M] c%v h%v d%v\n", d.Timestamp, d.DataPoints, d.Latitude, d.Longitude, int(d.Elevation), d.Seconds, d.Temperature, d.HeartRate, d.Cadence, d.Distance, d.Distance3D, int(d.Aggregates.Climb), d.Aggregates.Time, int(d.Aggregates.Distance), int(d.Aggregates.Distance3D), d.Maximums.Temperature, d.Maximums.HeartRate, d.Maximums.Cadence)
+	fmt.Printf("[%v][%v] %v,%v ^%v s%v c%v h%v d%v %v (%v) <%v> [A] ^%v +%v %v (%v) [M] c%v h%v d%v\n", d.Timestamp, d.DataPoints, d.Latitude, d.Longitude, int(d.Elevation), d.Seconds, d.Temperature, d.HeartRate, d.Cadence, d.Distance, d.Distance3D, d.Pace, int(d.Aggregates.Climb), d.Aggregates.Time, int(d.Aggregates.Distance), int(d.Aggregates.Distance3D), d.Maximums.Temperature, d.Maximums.HeartRate, d.Maximums.Cadence)
 }
 
 // Load a stream from a file
@@ -97,6 +99,8 @@ func (s *Stream) AddDrop(point gpx.TrackPoint) {
 			d.Distance = geo.DistanceInMetresBetweenPoints(geo.Point{Latitude: d.Latitude, Longitude: d.Longitude, Elevation: d.Elevation}, geo.Point{Latitude: previous.Latitude, Longitude: previous.Longitude, Elevation: previous.Elevation})
 			d.Distance3D = geo.DistanceInMetresIncludingElevation(geo.Point{Latitude: d.Latitude, Longitude: d.Longitude, Elevation: d.Elevation}, geo.Point{Latitude: previous.Latitude, Longitude: previous.Longitude, Elevation: previous.Elevation})
 
+			d.Pace = math.Round((1000/(d.Distance3D*60))*10000) / 10000
+
 			d.Aggregates.Distance = previous.Aggregates.Distance + d.Distance
 			d.Aggregates.Distance3D = previous.Aggregates.Distance3D + d.Distance3D
 		}
@@ -138,16 +142,4 @@ func (s *Stream) AddDrop(point gpx.TrackPoint) {
 	}
 
 	s.Drops = append(s.Drops, d)
-	// fmt.Printf("%v %v %v\n", d.Maximums.HeartRate, d.Maximums.Cadence, d.Maximums.Temperature)
-	// fmt.Printf("%v %v\n", d.Aggregates.Distance, d.Aggregates.Distance3D)
-
-	// fmt.Printf("%v\n", d.Timestamp.Sub(previous.Timestamp))
-	if (d.DataPoints%100 == 0) || (d.DataPoints == 1) {
-		d.Display()
-	}
-
 }
-
-// 	Timestamp   string ??
-//  Aggregates.Time
-//  Aggregates.MovingTime
