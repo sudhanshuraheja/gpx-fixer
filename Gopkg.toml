@@ -30,8 +30,8 @@
   unused-packages = true
 
 [[constraint]]
-  branch = "master"
   name = "github.com/sudhanshuraheja/go-garmin-gpx"
+  version = "1.0.0"
 
 [[constraint]]
   name = "github.com/stretchr/testify"
