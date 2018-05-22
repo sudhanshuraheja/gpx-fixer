@@ -179,8 +179,8 @@ func (d *Drop) addCadence(point *gpx.TrackPoint, previous *Drop) {
 }
 
 func (d *Drop) checkValidity(point *gpx.TrackPoint, previous *Drop) bool {
-	// If pace is under 2.5 minutes/km, it's faster than world record timing for 5k
-	if d.DataPoints > 1 && d.Pace < 2.5 {
+	// If pace is under 2.9139 minutes/km, it's faster than world record timing for the marathon
+	if d.DataPoints > 1 && d.Pace < 2.9139 {
 		return false
 	}
 	return true
