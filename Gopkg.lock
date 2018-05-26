@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/Zauberstuhl/go-xml"
+  packages = ["."]
+  revision = "534ffa2167237347a37c82b47c552806709bdba0"
+
+[[projects]]
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
@@ -22,12 +28,12 @@
 [[projects]]
   name = "github.com/sudhanshuraheja/go-garmin-gpx"
   packages = ["."]
-  revision = "600193238a3cc2ca56e1ef2ceed86e3710ecf59d"
-  version = "v1.0.0"
+  revision = "068f048fae1b6dde645adc7878cf52fb28edc1e4"
+  version = "v1.0.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b276f0085e25e90a649e0d9297480c41de900d57b1480ddbd0db1e49d81f32db"
+  inputs-digest = "a8ba12f038e047f5c0e990e27ce6c85edecf495e12159bf174de8c8218037c2a"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -65,6 +65,40 @@ func (s *Stream) removeInvalidData() {
 
 }
 
+// WriteToGPXFile writes a new compliant GPX file
+func (s *Stream) WriteToGPXFile(name string) error {
+	g := gpx.GPX{}
+	g.Version = "1.1"
+	g.Creator = "github/sudhanshuraheja/gpx-fixer"
+
+	ts := gpx.TrackSegment{}
+	ts.TrackPoint = []gpx.TrackPoint{}
+
+	for _, d := range s.Drops {
+		tp := gpx.TrackPoint{}
+		tp.Latitude = gpx.Latitude(d.Latitude)
+		tp.Longitude = gpx.Longitude(d.Longitude)
+		tp.Elevation = d.Elevation
+		tp.Timestamp = d.Timestamp.Format(time.RFC3339)
+
+		tp.Extensions = &gpx.TrackPointExtensions{}
+		tp.Extensions.TrackPointExtensions = &gpx.TrackPointExtension{}
+		tp.Extensions.TrackPointExtensions.Temperature = gpx.DegreesCelcius(d.Temperature)
+		tp.Extensions.TrackPointExtensions.HeartRate = gpx.BeatsPerMinute(d.HeartRate)
+		tp.Extensions.TrackPointExtensions.Cadence = gpx.RevolutionsPerMinute(d.Cadence)
+
+		ts.TrackPoint = append(ts.TrackPoint, tp)
+	}
+
+	t := gpx.Track{}
+	t.Name = name
+	t.TrackSegments = []gpx.TrackSegment{ts}
+
+	g.Tracks = []gpx.Track{t}
+
+	return gpx.Write(&g, "out")
+}
+
 // Drop is an individual point of data
 type Drop struct {
 	DataPoints  int

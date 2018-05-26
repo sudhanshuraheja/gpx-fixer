@@ -26,6 +26,9 @@ func Test_LoadStream(t *testing.T) {
 	assert.Equal(t, 7699.526, math.Round(final.Aggregates.Distance3D*1000)/1000)
 	assert.Equal(t, 2264, int(final.Aggregates.Time))
 
+	err := bad.WriteToGPXFile("badgps")
+	assert.Nil(t, err)
+
 	// s.Load("../external/strava-8kDelhi-May18.gpx")
 	// s.Load("../external/strava-Mumbai-Jan15.gpx")
 
