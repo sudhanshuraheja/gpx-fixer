@@ -12,3 +12,7 @@
 *.out
 
 vendor
+
+# Output of the stream
+out/*.gpx
+external/*.gpx
