@@ -3,7 +3,7 @@ module github.com/sudhanshuraheja/gpx-fixer
 go 1.19
 
 require (
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.9.0
 	github.com/sudhanshuraheja/go-garmin-gpx v1.0.2
 )
 
