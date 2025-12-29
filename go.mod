@@ -1,9 +1,9 @@
 module github.com/sudhanshuraheja/gpx-fixer
 
-go 1.19
+go 1.25
 
 require (
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 	github.com/sudhanshuraheja/go-garmin-gpx v1.0.2
 )
 
